@@ -18,11 +18,8 @@ writing your script.
 """
 
 def species (dataframe, col_name, cat_name):
-    irisspp = dataframe
-    for x in irisspp.index:
-        if irisspp.loc[x, col_name] != cat_name:
-            irisspp.drop(x, inplace=True)
-    return irisspp
+    species = dataframe[dataframe[col_name] == cat_name]
+    return species
 
 def linear_reg (dataframe, name, color, save_name):
     x = dataframe.petal_length_cm
@@ -46,10 +43,10 @@ def linear_reg (dataframe, name, color, save_name):
 
 if __name__ == '__main__':
     dataframe = pd.read_csv('iris.csv')
-    flow1 = species(dataframe, 'species', 'Iris_versicolor')
-    flow2 = species(dataframe, 'species', 'Iris_setosa')
-    flow3 = species(dataframe, 'species', 'Iris_virginica')
-    print(flow1)
+    flow1 = species(dataframe, 'species', 'iris_versicolor')
+    flow2 = species(dataframe, 'species', 'iris_setosa')
+    flow3 = species(dataframe, 'species', 'iris_virginica')
+
     linear_reg(flow1, 'versicolor', 'green', "ver_petal_v_sepal_length_regress.png")
     linear_reg(flow2, 'setosa', 'blue', "set_petal_v_sepal_length_regress.png")
     linear_reg(flow3, 'virginica', 'purple', "vir_petal_v_sepal_length_regress.png")
